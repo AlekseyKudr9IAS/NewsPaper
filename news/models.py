@@ -57,7 +57,7 @@ class Post(models.Model):
         return self.text[:124] + '...'
 
     def __str__(self):
-        return f'{self.title}{self.rating_post}{self.author}'
+        return f'{self.title}, {self.time_in}, {self.text[:20]}, {self.author}'
 
 
 class PostCategory(models.Model):

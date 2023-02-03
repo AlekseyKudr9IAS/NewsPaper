@@ -9,9 +9,11 @@ News
 
 {% block content %}
    <h1>Новости</h1>
-   <h3>Кол-во новостей: {{ news|length }}</h3>
+        {% if is_not_subscriber %}
+            <p class="text-center"><a href="{% url 'subscribe' category.id %}" class="btn btn-secondary btn-sm">Подписаться</a></p>
+        {% endif %}
     <hr>
-   {% if news %}
+   {% if category_news_list %}
        <table>
            <tr>
                <td>Заголовок</td>
@@ -21,7 +23,7 @@ News
            </tr>
 
 
-           {% for post in news %}
+           {% for post in category_news_list %}
            <tr>
 
                <td>{{ post.title }}</td>
@@ -32,6 +34,7 @@ News
                </td>
                <td>{{ post.time_in|date:'d M Y' }}</td>
                <td>{{ post.text|truncatewords:20|censor }}</td>
+
            </tr>
            {% endfor %}
 

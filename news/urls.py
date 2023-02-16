@@ -1,10 +1,11 @@
 from django.urls import path
+from django.views.decorators.cache import cache_page
 # Импортируем созданное нами представление
 from .views import *
 
 
 urlpatterns = [
-    path('news/', NewsList.as_view(), name='news_list'),
+    path('news/', cache_page(60)(NewsList.as_view()), name='news_list'),
     path('news/<int:pk>', NewsDetail.as_view(), name='post_details'),
     path('news/search/', PostSearch.as_view(), name='post_search'),
     path('news/create', NewsCreate.as_view(), name='news_create'),

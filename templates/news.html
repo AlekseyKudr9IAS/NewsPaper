@@ -9,6 +9,10 @@ News
 
 {% block content %}
    <h1>Новости</h1>
+    {% load cache %} <!-- Загружаем кэширование -->
+    {% cache 60 header %} <!-- Кэшируем отдельный блок на 30 секунд -->
+        <h3>Кол-во новостей: {{ news|length }}</h3>
+    {% endcache %}
    <h3>Кол-во новостей: {{ news|length }}</h3>
     <hr>
    {% if news %}
